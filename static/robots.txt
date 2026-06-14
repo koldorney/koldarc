@@ -1,0 +1,5 @@
+# Koldarc — allow all crawlers
+User-agent: *
+Allow: /
+
+Sitemap: https://koldarc.vercel.app/sitemap.xml
