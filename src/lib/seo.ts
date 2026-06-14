@@ -87,6 +87,44 @@ export function faqSchema() {
 	};
 }
 
+/** BreadcrumbList JSON-LD. `items` = [{name, path}] from home to current page. */
+export function breadcrumbSchema(items: { name: string; path: string }[]) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: items.map((it, i) => ({
+			'@type': 'ListItem',
+			position: i + 1,
+			name: it.name,
+			item: url(it.path)
+		}))
+	};
+}
+
+/** Service JSON-LD for a service landing page, tied to the LocalBusiness. */
+export function serviceSchema(opts: {
+	name: string;
+	description: string;
+	path: string;
+	areaServed: string[];
+}) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'Service',
+		serviceType: opts.name,
+		name: opts.name,
+		description: opts.description,
+		url: url(opts.path),
+		provider: { '@id': url('/#business') },
+		areaServed: opts.areaServed.map((name) => ({ '@type': 'City', name })),
+		availableChannel: {
+			'@type': 'ServiceChannel',
+			servicePhone: business.phoneHref,
+			serviceUrl: url('/#quote')
+		}
+	};
+}
+
 /** Serialize an object to a safe <script type="application/ld+json"> body. */
 export function jsonLd(obj: unknown) {
 	// Escape '<' to avoid breaking out of the <script> context.

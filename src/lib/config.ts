@@ -63,37 +63,44 @@ export const business = {
 
 /**
  * What we do. Each card is a real capability of a mobile welding rig.
+ * `href` links the card to its dedicated service page (see src/lib/content.ts).
  */
 export const services = [
 	{
 		icon: 'spark',
 		title: 'On-Site Repair Welding',
-		body: 'Cracked frames, broken brackets, snapped hitches — we weld it where it sits. No towing, no hauling, no downtime.'
+		body: 'Cracked frames, broken brackets, snapped hitches — we weld it where it sits. No towing, no hauling, no downtime.',
+		href: '/services/on-site-repair-welding'
 	},
 	{
 		icon: 'beam',
 		title: 'Structural & Steel',
-		body: 'Railings, stairs, gates, fencing, and structural steel fabricated and installed on location to spec.'
+		body: 'Railings, stairs, gates, fencing, and structural steel fabricated and installed on location to spec.',
+		href: '/services/structural-steel-welding'
 	},
 	{
 		icon: 'trailer',
 		title: 'Trailer & Equipment',
-		body: 'Trailer repairs, gooseneck and bumper hitches, equipment buckets, and farm gear patched up in the field.'
+		body: 'Trailer repairs, gooseneck and bumper hitches, equipment buckets, and farm gear patched up in the field.',
+		href: '/services/trailer-welding-repair'
 	},
 	{
 		icon: 'custom',
-		title: 'Custom Fabrication',
-		body: 'One-off brackets, racks, guards, and custom metalwork built to fit your project the first time.'
+		title: 'Railings, Gates & Fencing',
+		body: 'Custom handrails, stair rails, driveway gates, and metal fencing — fabricated and installed to fit.',
+		href: '/services/railing-gate-fabrication'
 	},
 	{
 		icon: 'aluminum',
 		title: 'Aluminum & Stainless',
-		body: 'TIG and MIG work on aluminum, stainless, and mild steel — clean welds that hold and look right.'
+		body: 'TIG and MIG work on aluminum, stainless, and mild steel — clean welds that hold and look right.',
+		href: '/services/aluminum-stainless-welding'
 	},
 	{
 		icon: 'clock',
 		title: 'Emergency Calls',
-		body: "Equipment down and costing you money? Call and we'll get a rig rolling to you as fast as we can."
+		body: "Equipment down and costing you money? Call and we'll get a rig rolling to you as fast as we can.",
+		href: '/services/emergency-mobile-welding'
 	}
 ];
 

@@ -1,8 +1,15 @@
 import { business } from '$lib/config';
+import { servicePages, locationPages } from '$lib/content';
 
-// Add more entries here as you add pages (e.g. /services/trailer-repair,
-// /knoxville-mobile-welding). Each one is a fresh URL Google can rank.
-const routes = ['/'];
+// All indexable routes, built from the content data so new service/location
+// pages are added to the sitemap automatically.
+const routes = [
+	'/',
+	'/services',
+	'/service-areas',
+	...servicePages.map((s) => `/services/${s.slug}`),
+	...locationPages.map((l) => `/service-areas/${l.slug}`)
+];
 
 export const prerender = true;
 

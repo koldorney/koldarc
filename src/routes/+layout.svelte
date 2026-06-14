@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { business } from '$lib/config';
+	import { servicePages, locationPages } from '$lib/content';
 	let { children } = $props();
 
 	let scrolled = $state(false);
@@ -11,11 +12,11 @@
 	}
 
 	const links = [
-		{ href: '#services', label: 'Services' },
-		{ href: '#why', label: 'Why Us' },
-		{ href: '#area', label: 'Service Area' },
-		{ href: '#faq', label: 'FAQ' },
-		{ href: '#quote', label: 'Get a Quote' }
+		{ href: '/services', label: 'Services' },
+		{ href: '/service-areas', label: 'Service Areas' },
+		{ href: '/#why', label: 'Why Us' },
+		{ href: '/#faq', label: 'FAQ' },
+		{ href: '/#quote', label: 'Get a Quote' }
 	];
 </script>
 
@@ -23,7 +24,7 @@
 
 <header class:scrolled>
 	<div class="container bar">
-		<a class="brand" href="#top" onclick={() => (menuOpen = false)}>
+		<a class="brand" href="/" onclick={() => (menuOpen = false)}>
 			<span class="mark" aria-hidden="true">
 				<svg viewBox="0 0 64 64"><path d="M35 12 L21 38 H32 L28 52 L45 24 H34 Z" /></svg>
 			</span>
@@ -58,12 +59,27 @@
 			<span class="word">{business.name}</span>
 			<p>{business.tagline} · {business.city}</p>
 			<p class="muted">{business.hours}</p>
+			<div class="foot-contact">
+				<a href="tel:{business.phoneHref}">{business.phone}</a>
+				<a href="mailto:{business.email}">{business.email}</a>
+				<a href="sms:{business.phoneHref}">Text us</a>
+			</div>
 		</div>
-		<div class="foot-contact">
-			<a href="tel:{business.phoneHref}">{business.phone}</a>
-			<a href="mailto:{business.email}">{business.email}</a>
-			<a href="sms:{business.phoneHref}">Text us</a>
-		</div>
+
+		<nav class="foot-col" aria-label="Services">
+			<span class="foot-h">Services</span>
+			{#each servicePages as s}
+				<a href="/services/{s.slug}">{s.name}</a>
+			{/each}
+		</nav>
+
+		<nav class="foot-col" aria-label="Service areas">
+			<span class="foot-h">Service Areas</span>
+			{#each locationPages as l}
+				<a href="/service-areas/{l.slug}">{l.name}</a>
+			{/each}
+			<a class="foot-more" href="/service-areas">All areas →</a>
+		</nav>
 	</div>
 	<div class="container foot-base">
 		<span>© {new Date().getFullYear()} {business.name}. Mobile welding, {business.city}.</span>
@@ -192,10 +208,9 @@
 		padding: 3rem 0 2rem;
 	}
 	.foot {
-		display: flex;
-		justify-content: space-between;
-		gap: 2rem;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: 1.5fr 1fr 1fr;
+		gap: 2.5rem;
 	}
 	.foot .word {
 		font-size: 1.6rem;
@@ -211,17 +226,45 @@
 	.foot-contact {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
-		text-align: right;
+		gap: 0.45rem;
+		margin-top: 1.2rem;
 	}
 	.foot-contact a {
 		font-family: var(--font-head);
 		letter-spacing: 0.05em;
-		font-size: 1.15rem;
+		font-size: 1.1rem;
 		color: var(--white);
 	}
 	.foot-contact a:hover {
 		color: var(--arc-2);
+	}
+	.foot-col {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.foot-h {
+		font-family: var(--font-head);
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.78rem;
+		color: var(--arc-2);
+		margin-bottom: 0.3rem;
+	}
+	.foot-col a {
+		color: var(--fog);
+		font-size: 0.92rem;
+	}
+	.foot-col a:hover {
+		color: var(--white);
+	}
+	.foot-more {
+		color: var(--mist) !important;
+		font-family: var(--font-head);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		font-size: 0.8rem;
+		margin-top: 0.2rem;
 	}
 	.foot-base {
 		display: flex;
@@ -279,8 +322,16 @@
 			color: var(--arc-2) !important;
 			border-bottom: 0 !important;
 		}
-		.foot-contact {
-			text-align: left;
+		.foot {
+			grid-template-columns: 1fr 1fr;
+		}
+		.foot-brand {
+			grid-column: 1 / -1;
+		}
+	}
+	@media (max-width: 480px) {
+		.foot {
+			grid-template-columns: 1fr;
 		}
 	}
 </style>

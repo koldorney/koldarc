@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { business, services, trust, faqs } from '$lib/config';
+	import { locationPages } from '$lib/content';
 	import { seo, url, localBusinessSchema, faqSchema, jsonLd } from '$lib/seo';
 	import type { ActionData } from './$types';
 
 	let { form }: { form: ActionData } = $props();
 	let submitting = $state(false);
 	let openFaq = $state<number | null>(0);
+
+	// Map town name -> location page slug for internal links from the area list.
+	const areaSlug = new Map(locationPages.map((l) => [l.name, l.slug]));
 
 	const v = (k: string) => (form?.values as Record<string, string> | undefined)?.[k] ?? '';
 	const err = (k: string) => (form?.errors as Record<string, string> | undefined)?.[k];
@@ -111,18 +115,20 @@
 			<p>
 				Truck-mounted and ready to roll. From a cracked bucket in a field to a railing on a new
 				build, we weld it where it sits — no hauling your steel across town.
+				<a class="head-link" href="/services">See all services →</a>
 			</p>
 		</div>
 
 		<div class="grid">
 			{#each services as s}
-				<article class="card">
+				<a class="card" href={s.href}>
 					<span class="card-icon" aria-hidden="true">
 						<svg viewBox="0 0 24 24" fill="currentColor"><path d={icons[s.icon]} /></svg>
 					</span>
 					<h3>{s.title}</h3>
 					<p>{s.body}</p>
-				</article>
+					<span class="card-go">Learn more <span aria-hidden="true">→</span></span>
+				</a>
 			{/each}
 		</div>
 	</div>
@@ -159,11 +165,18 @@
 			<hr class="hr-arc" />
 			<p class="eyebrow" style="margin-top:1rem">Where We Work</p>
 			<h2>Serving Knoxville &amp; East Tennessee</h2>
-			<p>Based in {business.city} and rolling out to the surrounding towns. Not on the list? Ask.</p>
+			<p>
+				Based in {business.city} and rolling out to the surrounding towns. Not on the list? Ask.
+				<a class="head-link" href="/service-areas">See all service areas →</a>
+			</p>
 		</div>
 		<ul class="area-list">
 			{#each business.serviceArea as town}
-				<li>{town}</li>
+				{#if areaSlug.has(town)}
+					<li><a href="/service-areas/{areaSlug.get(town)}">{town}</a></li>
+				{:else}
+					<li>{town}</li>
+				{/if}
 			{/each}
 		</ul>
 	</div>
@@ -467,6 +480,7 @@
 		gap: 1.1rem;
 	}
 	.card {
+		display: block;
 		background: linear-gradient(180deg, var(--steel-800), var(--steel-900));
 		border: 1px solid var(--line);
 		border-radius: var(--radius);
@@ -504,6 +518,30 @@
 		margin: 0;
 		color: var(--fog);
 		font-size: 0.97rem;
+	}
+	.card-go {
+		display: inline-block;
+		margin-top: 1rem;
+		font-family: var(--font-head);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		font-size: 0.82rem;
+		color: var(--arc-2);
+	}
+
+	/* shared section-head inline link */
+	.head-link {
+		display: inline-block;
+		margin-left: 0.4rem;
+		font-family: var(--font-head);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		font-size: 0.82rem;
+		color: var(--arc-2);
+		white-space: nowrap;
+	}
+	.head-link:hover {
+		text-decoration: underline;
 	}
 
 	/* WHY */
@@ -579,6 +617,12 @@
 	.area-list li:hover {
 		border-color: var(--arc);
 		color: var(--arc-2);
+	}
+	.area-list li a {
+		display: block;
+		margin: -0.6rem -1.15rem;
+		padding: 0.6rem 1.15rem;
+		color: inherit;
 	}
 
 	/* FAQ */
