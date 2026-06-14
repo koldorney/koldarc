@@ -110,9 +110,12 @@ Dedicated service + city pages outrank a single homepage for long-tail searches.
 
 ## Deploy
 
-Uses `@sveltejs/adapter-auto`, so it deploys as-is to Vercel, Netlify, or
-Cloudflare. Set the two `PUBLIC_SUPABASE_*` environment variables in your host's
-dashboard. (For a specific host you can swap in its dedicated adapter.)
+Deployed on **Vercel** (`@sveltejs/adapter-vercel`) and connected to this GitHub
+repo: **every push to `main` triggers an automatic production deploy.** Set the
+two `PUBLIC_SUPABASE_*` environment variables in the Vercel project settings to
+enable the quote form.
+
+Live: https://koldarc.vercel.app
 
 ---
 
