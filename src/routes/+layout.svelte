@@ -24,20 +24,54 @@
 	// Optional integrations — render only when configured (see .env.example).
 	const gsc = env.PUBLIC_GSC_VERIFICATION;
 	const plausibleDomain = env.PUBLIC_PLAUSIBLE_DOMAIN;
+
+	// Pre-launch takedown: when PUBLIC_MAINTENANCE === 'true', the entire site is
+	// replaced by a noindex "launching soon" holding page. Flip the env var to
+	// bring the real site back. See .env.example.
+	const maintenance = env.PUBLIC_MAINTENANCE === 'true';
 </script>
 
 <svelte:head>
-	{#if gsc}
-		<meta name="google-site-verification" content={gsc} />
-	{/if}
-	{#if plausibleDomain}
-		{@html `<script defer data-domain="${plausibleDomain}" src="https://plausible.io/js/script.js"><\/script>`}
+	{#if maintenance}
+		<title>{business.name} — Launching soon</title>
+		<meta name="robots" content="noindex, nofollow" />
+	{:else}
+		{#if gsc}
+			<meta name="google-site-verification" content={gsc} />
+		{/if}
+		{#if plausibleDomain}
+			{@html `<script defer data-domain="${plausibleDomain}" src="https://plausible.io/js/script.js"><\/script>`}
+		{/if}
 	{/if}
 </svelte:head>
 
 <svelte:window on:scroll={onScroll} />
 
-<header class:scrolled>
+{#if maintenance}
+	<main class="holding">
+		<span class="holding-mark" aria-hidden="true">
+			<svg viewBox="0 0 64 64">
+				<rect x="9" y="20" width="17" height="24" rx="3" fill="#46505d" />
+				<rect x="38" y="20" width="17" height="24" rx="3" fill="#46505d" />
+				<polyline
+					points="26,32 30,21 34,43 38,32"
+					fill="none"
+					stroke="#ff6a1a"
+					stroke-width="4.5"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+				<circle cx="32" cy="32" r="4" fill="#ffb340" />
+				<circle cx="32" cy="13" r="1.8" fill="#ffb340" />
+				<circle cx="32" cy="51" r="1.8" fill="#ffb340" />
+			</svg>
+		</span>
+		<span class="holding-word">{business.name}</span>
+		<h1 class="holding-title">Launching soon</h1>
+		<p class="holding-sub">Mobile Welding · {business.city}</p>
+	</main>
+{:else}
+	<header class:scrolled>
 	<div class="container bar">
 		<a class="brand" href="/" onclick={() => (menuOpen = false)}>
 			<span class="mark" aria-hidden="true">
@@ -122,8 +156,55 @@
 		<span class="muted">Bring the arc to you.</span>
 	</div>
 </footer>
+{/if}
 
 <style>
+	.holding {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		gap: 0.4rem;
+		padding: 2rem;
+		background:
+			radial-gradient(90% 70% at 50% 0%, rgba(255, 106, 26, 0.12), transparent 60%),
+			linear-gradient(180deg, var(--steel-900), var(--ink));
+	}
+	.holding-mark svg {
+		width: 84px;
+		height: 84px;
+		filter: drop-shadow(0 0 10px var(--arc-glow));
+	}
+	.holding-word {
+		font-family: var(--font-head);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		font-size: 1.6rem;
+		color: var(--white);
+		margin-top: 0.6rem;
+	}
+	.holding-title {
+		font-family: var(--font-head);
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		font-size: clamp(2.4rem, 7vw, 4rem);
+		color: var(--arc);
+		margin: 0.4rem 0 0;
+		text-shadow: 0 0 28px var(--arc-glow);
+	}
+	.holding-sub {
+		font-family: var(--font-head);
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		font-size: 0.9rem;
+		color: var(--fog);
+		margin: 0.3rem 0 0;
+	}
+
 	header {
 		position: fixed;
 		inset: 0 0 auto 0;
