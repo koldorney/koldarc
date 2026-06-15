@@ -125,6 +125,27 @@ export function serviceSchema(opts: {
 	};
 }
 
+/** Article (BlogPosting) JSON-LD for a guide page. */
+export function articleSchema(opts: {
+	headline: string;
+	description: string;
+	path: string;
+	datePublished: string;
+}) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: opts.headline,
+		description: opts.description,
+		datePublished: opts.datePublished,
+		dateModified: opts.datePublished,
+		image: url(seo.ogImage),
+		mainEntityOfPage: { '@type': 'WebPage', '@id': url(opts.path) },
+		author: { '@type': 'Organization', name: business.name, '@id': url('/#business') },
+		publisher: { '@id': url('/#business') }
+	};
+}
+
 /** Serialize an object to a safe <script type="application/ld+json"> body. */
 export function jsonLd(obj: unknown) {
 	// Escape '<' to avoid breaking out of the <script> context.

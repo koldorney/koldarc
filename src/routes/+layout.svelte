@@ -1,7 +1,9 @@
 <script lang="ts">
 	import '../app.css';
+	import { env } from '$env/dynamic/public';
 	import { business } from '$lib/config';
 	import { servicePages, locationPages } from '$lib/content';
+	import { guides } from '$lib/guides';
 	let { children } = $props();
 
 	let scrolled = $state(false);
@@ -14,11 +16,24 @@
 	const links = [
 		{ href: '/services', label: 'Services' },
 		{ href: '/service-areas', label: 'Service Areas' },
-		{ href: '/#why', label: 'Why Us' },
+		{ href: '/guides', label: 'Guides' },
 		{ href: '/#faq', label: 'FAQ' },
 		{ href: '/#quote', label: 'Get a Quote' }
 	];
+
+	// Optional integrations — render only when configured (see .env.example).
+	const gsc = env.PUBLIC_GSC_VERIFICATION;
+	const plausibleDomain = env.PUBLIC_PLAUSIBLE_DOMAIN;
 </script>
+
+<svelte:head>
+	{#if gsc}
+		<meta name="google-site-verification" content={gsc} />
+	{/if}
+	{#if plausibleDomain}
+		{@html `<script defer data-domain="${plausibleDomain}" src="https://plausible.io/js/script.js"><\/script>`}
+	{/if}
+</svelte:head>
 
 <svelte:window on:scroll={onScroll} />
 
@@ -93,6 +108,13 @@
 				<a href="/service-areas/{l.slug}">{l.name}</a>
 			{/each}
 			<a class="foot-more" href="/service-areas">All areas →</a>
+		</nav>
+
+		<nav class="foot-col" aria-label="Guides">
+			<span class="foot-h">Guides</span>
+			{#each guides as g}
+				<a href="/guides/{g.slug}">{g.title}</a>
+			{/each}
 		</nav>
 	</div>
 	<div class="container foot-base">

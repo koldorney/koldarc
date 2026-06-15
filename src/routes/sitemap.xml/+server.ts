@@ -1,14 +1,17 @@
 import { business } from '$lib/config';
 import { servicePages, locationPages } from '$lib/content';
+import { guides } from '$lib/guides';
 
-// All indexable routes, built from the content data so new service/location
-// pages are added to the sitemap automatically.
+// All indexable routes, built from the content data so new service/location/
+// guide pages are added to the sitemap automatically.
 const routes = [
 	'/',
 	'/services',
 	'/service-areas',
+	'/guides',
 	...servicePages.map((s) => `/services/${s.slug}`),
-	...locationPages.map((l) => `/service-areas/${l.slug}`)
+	...locationPages.map((l) => `/service-areas/${l.slug}`),
+	...guides.map((g) => `/guides/${g.slug}`)
 ];
 
 export const prerender = true;
