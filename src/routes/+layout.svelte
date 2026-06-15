@@ -26,7 +26,21 @@
 	<div class="container bar">
 		<a class="brand" href="/" onclick={() => (menuOpen = false)}>
 			<span class="mark" aria-hidden="true">
-				<svg viewBox="0 0 64 64"><path d="M35 12 L21 38 H32 L28 52 L45 24 H34 Z" /></svg>
+				<svg viewBox="0 0 64 64">
+					<rect x="9" y="20" width="17" height="24" rx="3" fill="#46505d" />
+					<rect x="38" y="20" width="17" height="24" rx="3" fill="#46505d" />
+					<polyline
+						points="26,32 30,21 34,43 38,32"
+						fill="none"
+						stroke="#ff6a1a"
+						stroke-width="4.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+					<circle cx="32" cy="32" r="4" fill="#ffb340" />
+					<circle cx="32" cy="13" r="1.8" fill="#ffb340" />
+					<circle cx="32" cy="51" r="1.8" fill="#ffb340" />
+				</svg>
 			</span>
 			<span class="word">{business.name}</span>
 		</a>
@@ -115,8 +129,8 @@
 		gap: 0.6rem;
 	}
 	.mark {
-		width: 34px;
-		height: 34px;
+		width: 36px;
+		height: 36px;
 		display: grid;
 		place-items: center;
 		border-radius: 9px;
@@ -124,10 +138,9 @@
 		border: 1px solid var(--line);
 	}
 	.mark svg {
-		width: 20px;
-		height: 20px;
-		fill: var(--arc);
-		filter: drop-shadow(0 0 6px var(--arc-glow));
+		width: 26px;
+		height: 26px;
+		filter: drop-shadow(0 0 4px var(--arc-glow));
 	}
 	.word {
 		font-family: var(--font-head);
