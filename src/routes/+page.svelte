@@ -358,7 +358,7 @@
 		inset: 0;
 		z-index: 0;
 		background:
-			radial-gradient(120% 90% at 80% -10%, rgba(255, 106, 26, 0.16), transparent 55%),
+			radial-gradient(120% 90% at 80% -10%, rgba(108, 194, 234, 0.16), transparent 55%),
 			radial-gradient(90% 70% at 0% 0%, rgba(109, 181, 255, 0.08), transparent 50%),
 			linear-gradient(180deg, var(--steel-900), var(--ink));
 	}
@@ -501,8 +501,8 @@
 		width: 48px;
 		height: 48px;
 		border-radius: 11px;
-		background: rgba(255, 106, 26, 0.1);
-		border: 1px solid rgba(255, 106, 26, 0.25);
+		background: rgba(108, 194, 234, 0.1);
+		border: 1px solid rgba(108, 194, 234, 0.25);
 		margin-bottom: 1.1rem;
 	}
 	.card-icon svg {
@@ -716,7 +716,7 @@
 	/* QUOTE */
 	.quote {
 		background:
-			radial-gradient(80% 60% at 100% 0%, rgba(255, 106, 26, 0.1), transparent 55%),
+			radial-gradient(80% 60% at 100% 0%, rgba(108, 194, 234, 0.1), transparent 55%),
 			var(--steel-900);
 		border-top: 1px solid var(--line);
 	}
@@ -759,8 +759,8 @@
 		font-size: 0.72rem;
 		letter-spacing: 0.16em;
 		color: var(--arc-2);
-		border: 1px solid rgba(255, 106, 26, 0.3);
-		background: rgba(255, 106, 26, 0.08);
+		border: 1px solid rgba(108, 194, 234, 0.3);
+		background: rgba(108, 194, 234, 0.08);
 		border-radius: 6px;
 	}
 
@@ -823,7 +823,7 @@
 	}
 	select {
 		appearance: none;
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ff6a1a' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236cc2ea' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
 		background-repeat: no-repeat;
 		background-position: right 1rem center;
 		padding-right: 2.4rem;

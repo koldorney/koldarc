@@ -1,5 +1,12 @@
+@font-face {
+	font-family: 'Doctor Western';
+	src: url('/fonts/doctor_western.ttf') format('truetype');
+	font-weight: 400;
+	font-display: swap;
+}
+
 :root {
-	/* Steel & molten-arc palette */
+	/* Steel & cold-arc (icy) palette */
 	--ink: #0c0e12;
 	--steel-900: #14181f;
 	--steel-800: #1b2027;
@@ -10,16 +17,18 @@
 	--mist: #c6cfda;
 	--white: #f4f7fb;
 
-	/* Arc accents */
-	--arc: #ff6a1a; /* molten orange */
-	--arc-2: #ffb340; /* hot spark */
-	--arc-glow: rgba(255, 106, 26, 0.35);
+	/* Cold-arc accents (icy blue) */
+	--arc: #6cc2ea; /* ice blue */
+	--arc-2: #a9e4fb; /* frost highlight */
+	--arc-glow: rgba(108, 194, 234, 0.35);
 	--weld-blue: #6db5ff; /* cool arc flash */
 
 	--ok: #5dd39e;
 	--err: #ff6b6b;
 
-	--font-head: 'Oswald', 'Arial Narrow', sans-serif;
+	/* Doctor Western for the logo + big headlines; Inter for everything read */
+	--font-display: 'Doctor Western', 'Times New Roman', serif;
+	--font-head: 'Inter', system-ui, sans-serif;
 	--font-body: 'Inter', system-ui, sans-serif;
 
 	--maxw: 1120px;
@@ -56,6 +65,14 @@ h3 {
 	line-height: 1.05;
 	margin: 0;
 	text-transform: uppercase;
+}
+
+/* Big display moments use the western face; h3 (card/panel titles) stays Inter for readability */
+h1,
+h2 {
+	font-family: var(--font-display);
+	font-weight: 400;
+	letter-spacing: 0.015em;
 }
 
 a {
@@ -109,7 +126,7 @@ img {
 }
 .btn-primary {
 	background: linear-gradient(180deg, var(--arc-2), var(--arc));
-	color: #1a0c02;
+	color: #06222e;
 	box-shadow:
 		0 8px 24px -8px var(--arc-glow),
 		inset 0 1px 0 rgba(255, 255, 255, 0.4);
@@ -163,7 +180,7 @@ section {
 
 ::selection {
 	background: var(--arc);
-	color: #160a02;
+	color: #06222e;
 }
 
 /* ============================================================
@@ -176,7 +193,7 @@ section {
 	position: relative;
 	padding: clamp(7rem, 14vw, 9.5rem) 0 clamp(2.5rem, 6vw, 4rem);
 	background:
-		radial-gradient(90% 80% at 85% 0%, rgba(255, 106, 26, 0.14), transparent 55%),
+		radial-gradient(90% 80% at 85% 0%, rgba(108, 194, 234, 0.14), transparent 55%),
 		linear-gradient(180deg, var(--steel-900), var(--ink));
 	border-bottom: 1px solid var(--line);
 }
@@ -281,9 +298,9 @@ section {
 	background: var(--arc);
 }
 .panel-cta {
-	border-color: rgba(255, 106, 26, 0.3);
+	border-color: rgba(108, 194, 234, 0.3);
 	background:
-		radial-gradient(120% 100% at 0% 0%, rgba(255, 106, 26, 0.1), transparent 60%),
+		radial-gradient(120% 100% at 0% 0%, rgba(108, 194, 234, 0.1), transparent 60%),
 		var(--steel-800);
 }
 .panel-cta p {

@@ -49,24 +49,7 @@
 
 {#if maintenance}
 	<main class="holding">
-		<span class="holding-mark" aria-hidden="true">
-			<svg viewBox="0 0 64 64">
-				<rect x="9" y="20" width="17" height="24" rx="3" fill="#46505d" />
-				<rect x="38" y="20" width="17" height="24" rx="3" fill="#46505d" />
-				<polyline
-					points="26,32 30,21 34,43 38,32"
-					fill="none"
-					stroke="#ff6a1a"
-					stroke-width="4.5"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				/>
-				<circle cx="32" cy="32" r="4" fill="#ffb340" />
-				<circle cx="32" cy="13" r="1.8" fill="#ffb340" />
-				<circle cx="32" cy="51" r="1.8" fill="#ffb340" />
-			</svg>
-		</span>
-		<span class="holding-word">{business.name}</span>
+		<span class="holding-word">KOLD<span class="word-arc">ARC</span></span>
 		<h1 class="holding-title">Launching soon</h1>
 		<p class="holding-sub">Mobile Welding · {business.city}</p>
 	</main>
@@ -74,24 +57,7 @@
 	<header class:scrolled>
 	<div class="container bar">
 		<a class="brand" href="/" onclick={() => (menuOpen = false)}>
-			<span class="mark" aria-hidden="true">
-				<svg viewBox="0 0 64 64">
-					<rect x="9" y="20" width="17" height="24" rx="3" fill="#46505d" />
-					<rect x="38" y="20" width="17" height="24" rx="3" fill="#46505d" />
-					<polyline
-						points="26,32 30,21 34,43 38,32"
-						fill="none"
-						stroke="#ff6a1a"
-						stroke-width="4.5"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					/>
-					<circle cx="32" cy="32" r="4" fill="#ffb340" />
-					<circle cx="32" cy="13" r="1.8" fill="#ffb340" />
-					<circle cx="32" cy="51" r="1.8" fill="#ffb340" />
-				</svg>
-			</span>
-			<span class="word">{business.name}</span>
+			<span class="word">KOLD<span class="word-arc">ARC</span></span>
 		</a>
 
 		<nav class:open={menuOpen}>
@@ -119,7 +85,7 @@
 <footer>
 	<div class="container foot">
 		<div class="foot-brand">
-			<span class="word">{business.name}</span>
+			<span class="word">KOLD<span class="word-arc">ARC</span></span>
 			<p>{business.tagline} · {business.city}</p>
 			<p class="muted">{business.hours}</p>
 			<div class="foot-contact">
@@ -169,32 +135,25 @@
 		gap: 0.4rem;
 		padding: 2rem;
 		background:
-			radial-gradient(90% 70% at 50% 0%, rgba(255, 106, 26, 0.12), transparent 60%),
+			radial-gradient(90% 70% at 50% 0%, rgba(108, 194, 234, 0.12), transparent 60%),
 			linear-gradient(180deg, var(--steel-900), var(--ink));
 	}
-	.holding-mark svg {
-		width: 84px;
-		height: 84px;
-		filter: drop-shadow(0 0 10px var(--arc-glow));
-	}
 	.holding-word {
-		font-family: var(--font-head);
-		font-weight: 700;
+		font-family: var(--font-display);
 		text-transform: uppercase;
-		letter-spacing: 0.2em;
-		font-size: 1.6rem;
+		letter-spacing: 0.04em;
+		font-size: clamp(3rem, 10vw, 5.5rem);
+		line-height: 1;
 		color: var(--white);
-		margin-top: 0.6rem;
 	}
 	.holding-title {
 		font-family: var(--font-head);
 		font-weight: 600;
 		text-transform: uppercase;
-		letter-spacing: 0.04em;
-		font-size: clamp(2.4rem, 7vw, 4rem);
-		color: var(--arc);
-		margin: 0.4rem 0 0;
-		text-shadow: 0 0 28px var(--arc-glow);
+		letter-spacing: 0.22em;
+		font-size: clamp(1rem, 3vw, 1.4rem);
+		color: var(--fog);
+		margin: 1.1rem 0 0;
 	}
 	.holding-sub {
 		font-family: var(--font-head);
@@ -231,27 +190,15 @@
 		align-items: center;
 		gap: 0.6rem;
 	}
-	.mark {
-		width: 36px;
-		height: 36px;
-		display: grid;
-		place-items: center;
-		border-radius: 9px;
-		background: linear-gradient(180deg, var(--steel-700), var(--steel-900));
-		border: 1px solid var(--line);
-	}
-	.mark svg {
-		width: 26px;
-		height: 26px;
-		filter: drop-shadow(0 0 4px var(--arc-glow));
-	}
 	.word {
-		font-family: var(--font-head);
-		font-weight: 700;
+		font-family: var(--font-display);
 		text-transform: uppercase;
-		letter-spacing: 0.14em;
-		font-size: 1.35rem;
+		letter-spacing: 0.04em;
+		font-size: 1.6rem;
 		color: var(--white);
+	}
+	.word-arc {
+		color: var(--arc);
 	}
 
 	nav {
@@ -285,7 +232,7 @@
 		padding: 0.6rem 1.15rem;
 		border-radius: 999px;
 		background: linear-gradient(180deg, var(--arc-2), var(--arc));
-		color: #1a0c02;
+		color: #06222e;
 		box-shadow: 0 8px 22px -10px var(--arc-glow);
 	}
 
